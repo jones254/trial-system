@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Plan Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Forex Trade Plan Generator</h1>
+    <p class="disclaimer">WARNING: For educational use only. Not financial advice. Trading involves risk.</p>
+
+    <div class="input-section">
+        <div class="form-group">
+            <label for="symbol">Currency Pair (e.g., EUR/USD, GBP/JPY):</label>
+            <input type="text" id="symbol" placeholder="EUR/USD" value="EUR/USD">
+        </div>
+
+        <div class="form-group">
+            <label>Your Bias:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="bias" value="BUY" checked> Buy (Long)</label>
+                <label><input type="radio" name="bias" value="SELL"> Sell (Short)</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="confidence">Confidence Score (1-10): <span id="confValue">5</span></label>
+            <input type="range" id="confidence" min="1" max="10" value="5" oninput="document.getElementById('confValue').innerText = this.value">
+        </div>
+
+        <div class="form-group">
+            <label for="avgRsi">Your Observed Average RSI (0-100):</label>
+            <input type="number" id="avgRsi" min="0" max="100" placeholder="e.g., 45">
+        </div>
+
+        <button id="generateBtn">Analyze & Generate Plan</button>
+    </div>
+
+    <div id="loading" class="hidden">Fetching data from Twelve Data and analyzing...</div>
+    <div id="error" class="hidden"></div>
+
+    <div id="results" class="hidden">
+        <h2>Proposed Trade Plan</h2>
+        <div class="plan-grid">
+            <div class="plan-item">
+                <span class="label">Symbol:</span>
+                <span class="value" id="resSymbol">--</span>
+            </div>
+             <div class="plan-item">
+                <span class="label">Current Price:</span>
+                <span class="value" id="resCurrentPrice">--</span>
+            </div>
+            <div class="plan-item highlight">
+                <span class="label">Order Type:</span>
+                <span class="value" id="resOrderType">--</span>
+            </div>
+            <div class="plan-item highlight">
+                <span class="label">Entry Price:</span>
+                <span class="value" id="resEntry">--</span>
+            </div>
+            <div class="plan-item stop-loss">
+                <span class="label">Stop Loss (SL):</span>
+                <span class="value" id="resSL">--</span>
+                <span class="sub-value" id="resSLPips">(-- pips)</span>
+            </div>
+            <div class="plan-item take-profit">
+                <span class="label">Take Profit (TP):</span>
+                <span class="value" id="resTP">--</span>
+                <span class="sub-value" id="resTPPips">(-- pips)</span>
+            </div>
+             <div class="plan-item">
+                <span class="label">Risk:Reward Ratio:</span>
+                <span class="value" id="resRR">--</span>
+            </div>
+        </div>
+        <div class="analysis-notes">
+            <h3>Analysis Notes:</h3>
+            <ul id="analysisList">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+              </html>
